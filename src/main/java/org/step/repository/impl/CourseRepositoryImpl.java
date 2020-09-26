@@ -1,45 +1,43 @@
 package org.step.repository.impl;
 
+import org.springframework.stereotype.Repository;
 import org.step.entity.Course;
+import org.step.entity.Profile;
 import org.step.repository.CrudRepository;
 import org.step.repository.SessionFactoryCreator;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class CourseRepositoryImpl implements CrudRepository<Course> {
+@Repository
+public class CourseRepositoryImpl implements CrudRepository<Course>  {
 
-    private final EntityManager entityManager = SessionFactoryCreator.getEntityManager();
+        @PersistenceContext
+        private EntityManager entityManager;
 
-    @Override
-    public void deleteAll() {
+        @Override
+        public Course save(Course course) {
+            entityManager.persist(course);
+            return course;
+        }
 
-    }
+        @Override
+        public List<Course> findAll() {
+            return entityManager.createQuery("select c from Course c", Course.class)
+                    .getResultList();
+        }
 
-    @Override
-    public Course save(Course course) {
-        entityManager.getTransaction().begin();
+        @Override
+        public void delete(Long id) {
+            entityManager.createQuery("delete from Course c where c.id=:id")
+                    .setParameter("id", id)
+                    .executeUpdate();
+        }
 
-        Course builtCourse = Course.builder()
-                .id()
-                .topic(course.getTopic())
-                .courseDescription(course.getCourseDescription())
-                .build();
-
-        entityManager.persist(builtCourse);
-
-        entityManager.getTransaction().commit();
-
-        return builtCourse;
-    }
-
-    @Override
-    public List<Course> findAll() {
-        return null;
-    }
-
-    @Override
-    public void delete(Long id) {
-
-    }
+        @Override
+        public void deleteAll() {
+            entityManager.createNativeQuery("DELETE FROM COURSE")
+                    .executeUpdate();
+        }
 }
