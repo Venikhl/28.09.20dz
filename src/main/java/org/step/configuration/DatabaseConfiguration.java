@@ -57,7 +57,7 @@ public class DatabaseConfiguration {
     globalSession - как и session, только для Portlet web приложений
      */
     @Bean(value = "dataSourceJavaConfig")
-    @Profile("default")
+    @Profile("dev")
 //    @Scope("prototype")
     public DataSource dataSourceDevelopment() {
         System.out.println("***********THIS IS DEV***********");
