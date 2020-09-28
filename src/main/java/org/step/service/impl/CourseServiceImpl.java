@@ -5,12 +5,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.step.entity.Course;
 import org.step.repository.CrudRepository;
+import org.step.service.CourseService;
 import org.step.service.CrudService;
 
 import java.util.List;
 
 @Service
-public class CourseServiceImpl implements CrudService<Course> {
+public class CourseServiceImpl implements CourseService {
 
     private final CrudRepository<Course> courseCrudRepository;
 

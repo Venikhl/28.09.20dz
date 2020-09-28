@@ -20,7 +20,7 @@ import java.util.List;
 public class ProfileServiceImplTest {
 
     @Autowired
-    private CrudService<Profile> profileCrudService;
+    private ProfileService profileCrudService;
 
     private Profile profile;
 

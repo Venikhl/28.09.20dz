@@ -11,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.step.configuration.DatabaseConfiguration;
 import org.step.entity.Course;
-import org.step.entity.Profile;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ import java.util.List;
 public class CourseServiceImplTest {
 
     @Autowired
-    private CrudService<Course> courseCrudService;
+    private CourseService courseCrudService;
 
     private Course course;
 
@@ -53,7 +52,7 @@ public class CourseServiceImplTest {
 
     @Test
     public void shouldDeleteCourse() {
-        courseCrudService.delete(Long.parseLong(course.getId()));
+        courseCrudService.delete(course.getId());
     }
 
     @Test

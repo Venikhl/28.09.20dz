@@ -1,4 +1,4 @@
-package org.step.repository;
+/*package org.step.repository;
 
 import org.junit.Test;
 import org.step.entity.Course;
@@ -16,4 +16,4 @@ public class CourseRepositoryTest {
 
         System.out.println(save.toString());
     }
-}
+}*/

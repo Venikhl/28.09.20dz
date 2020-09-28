@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.step.entity.Profile;
 import org.step.repository.CrudRepository;
-import org.step.service.CrudService;
+import org.step.service.ProfileService;
 
 import java.util.List;
 
 @Service
-public class ProfileServiceImpl implements CrudService<Profile> {
+public class ProfileServiceImpl implements ProfileService {
 
 //    Not recommended
 //    @Autowired

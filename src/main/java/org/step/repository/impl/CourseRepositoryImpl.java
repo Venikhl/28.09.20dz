@@ -37,7 +37,7 @@ public class CourseRepositoryImpl implements CrudRepository<Course>  {
 
         @Override
         public void deleteAll() {
-            entityManager.createNativeQuery("DELETE FROM COURSE")
+            entityManager.createNativeQuery("DELETE FROM COURSES")
                     .executeUpdate();
         }
 }

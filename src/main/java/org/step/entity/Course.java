@@ -11,8 +11,9 @@ import java.util.UUID;
 public class Course {
 
     @Id
-//    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "topic")
     private String topic;
@@ -36,7 +37,7 @@ public class Course {
     public Course() {
     }
 
-    private Course(String id, String topic, String courseDescription) {
+    private Course(Long id, String topic, String courseDescription) {
         this.id = id;
         this.topic = topic;
         this.courseDescription = courseDescription;
@@ -54,11 +55,11 @@ public class Course {
         this.userSet = userSet;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,14 +80,14 @@ public class Course {
     }
 
     public static class CourseBuilder {
-        private String id;
+        private Long id;
         private String topic, courseDescription;
 
         private CourseBuilder() {
         }
 
-        public CourseBuilder id() {
-            this.id = UUID.randomUUID().toString();
+        public CourseBuilder id(Long id) {
+            this.id = id;
             return this;
         }
 

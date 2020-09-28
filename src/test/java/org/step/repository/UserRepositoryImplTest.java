@@ -214,7 +214,6 @@ public class UserRepositoryImplTest {
     @Test
     public void shouldAddCourseToUser() {
         Course course = Course.builder()
-                .id()
                 .topic("topic")
                 .courseDescription("course description")
                 .build();
@@ -242,7 +241,7 @@ public class UserRepositoryImplTest {
 
         User user = all.get(0);
 
-        Course build = Course.builder().id().topic("dasd").courseDescription("dsad").build();
+        Course build = Course.builder().topic("dasd").courseDescription("dsad").build();
 
         Session session = SessionFactoryCreator.getSession();
 
