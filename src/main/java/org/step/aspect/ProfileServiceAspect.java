@@ -4,6 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.step.entity.Course;
 import org.step.entity.Profile;
 
 import java.util.Set;
@@ -35,42 +36,28 @@ public class ProfileServiceAspect {
     @Around working before and after method
      */
     @Pointcut(
-            "execution(public org.step.entity.Profile org.step.service.CrudService.save(org.step.entity.Profile))"
+            "execution(public org.step.entity.Profile org.step.service.CourseService.save(org.step.entity.Course))"
     )
-    public void saveMethodProfileServiceApplied() {}
+    public void saveMethodUser() {}
 
     @Pointcut("execution(public * org.step.service.CrudService.save(..))")
     public void saveMethodForAllEntities() {}
 
-    @Before("saveMethodProfileServiceApplied()")
-    public void loggingSaveProfileMethods(JoinPoint joinPoint) {
+    @Before("saveMethodUser()")
+    public void getCourses(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
 
-        Set<Profile> profiles = Stream.of(args)
-                .filter(obj -> obj.getClass().isAssignableFrom(Profile.class))
-                .map(obj -> (Profile) obj)
+        Set<Course> courses = Stream.of(args)
+                .filter(obj -> obj.getClass().isAssignableFrom(Course.class))
+                .map(obj -> (Course) obj)
                 .collect(Collectors.toSet());
 
-        profiles
+        courses
                 .stream()
                 .findFirst()
-                .ifPresent(profile -> {
-                    System.out.printf("@Before aspect is called %s%n", profile.getGraduation());
+                .ifPresent(course -> {
+                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.printf("@Before aspect is called %s%n", course);
                 });
-    }
-
-    @After("saveMethodProfileServiceApplied()")
-    public void afterSaveMethodProfileServiceApplied(JoinPoint joinPoint) {
-        System.out.printf("@After aspect is called %s%n", joinPoint.getSignature().toShortString());
-    }
-
-    @AfterReturning(
-            pointcut = "saveMethodProfileServiceApplied()",
-            returning = "profile"
-    )
-    public void returningAfterSaveMethodProfileServiceApplied(JoinPoint joinPoint, Profile profile) {
-        System.out.printf("@AfterReturning is called %s%n", joinPoint.getSignature().toShortString());
-
-        System.out.println(profile.toString());
     }
 }
